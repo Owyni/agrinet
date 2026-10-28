@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf8f5;
+  --foreground: #1c1917;
+  --foreground-muted: #57534e;
+  --surface: #ffffff;
+  --field-primary: #163828;
+  --field-accent: #2d6a4f;
+  --field-soft: #eef5f0;
+  --earth-clay: #b4533c;
+  --earth-clay-ink: #9f402d;
+  --earth-sand: #f3ede4;
+  --earth-border: #e8e2d9;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-field-primary: var(--field-primary);
+  --color-field-accent: var(--field-accent);
+  --color-field-soft: var(--field-soft);
+  --color-earth-clay: var(--earth-clay);
+  --color-earth-clay-ink: var(--earth-clay-ink);
+  --color-earth-sand: var(--earth-sand);
+  --color-earth-border: var(--earth-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  color-scheme: light;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* El texto secundario conserva el contraste definido para la paleta de marca. */
+:where(.text-stone-400, .text-stone-500) {
+  color: var(--foreground-muted);
+}
+
+:where(.placeholder-stone-400)::placeholder {
+  color: var(--foreground-muted);
+  opacity: 1;
+}
+
+/* Enfoque accesible universal para teclado (R-32 & antislop-human) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--field-accent);
+  outline-offset: 2px;
 }
